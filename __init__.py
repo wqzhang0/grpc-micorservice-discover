@@ -1,0 +1,1 @@
+name = "grpc-micorservice-discover"

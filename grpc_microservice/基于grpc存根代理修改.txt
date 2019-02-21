@@ -1,0 +1,5 @@
+生成的room_server_pb2_grpc.py 文件
+
+
+1 基于RoomServerStub 方法进行代理（45-70 行）
+2  增加143行代码  进行服务注册    register_module(generic_handler)

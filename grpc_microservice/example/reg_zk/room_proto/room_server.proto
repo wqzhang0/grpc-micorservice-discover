@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+
+message CommonReply {
+    // 200 / 400
+    int32 code = 1;
+    string error_msg = 2;
+}
+
+/*
+加入房间，返回
+code 400 + error_msg
+code 200 + game_record_id
+*/
+message JoinRoomReply {
+    // 200 / 400
+    CommonReply common = 1;
+    int32 game_record_id = 2;
+}
+
+
+/*
+加入房间
+玩家id ,加入类型
+*/
+message RandomJoinRoomRequest {
+    // 玩家id
+    int32 player_id = 2;
+    // 加入类型
+    int32 type = 3;
+}
+
+
+/*
+加入房间
+玩家id ,加入类型
+*/
+message JoinRoomRequest {
+    // 玩家id
+    int32 player_id = 2;
+    // 加入类型
+    string type = 3;
+    int32 room_number = 4;
+    int32 need_password = 5;
+    int32 password = 6;
+}
+
+
+
+message CreateRoomRequest {
+    int32 player_id = 1;
+    int32 type = 2;
+    int32 script_id = 3;
+    bool lock = 4;
+    string password = 5;
+
+}
+message RollOutRoomRequest {
+    // 玩家id
+    int32 player_id = 2;
+}
+
+message KicksPlayerRequest {
+    // 玩家id
+    int32 player_id = 2;
+    int32 room_id = 3;
+    int32 target_player_id = 4;
+}
+
+
+service RoomServer {
+    // 随机加入房间
+    rpc RandomJoinRoom (RandomJoinRoomRequest) returns (JoinRoomReply) {
+    }
+    // 加入房间
+    rpc JoinRoom (JoinRoomRequest) returns (JoinRoomReply) {
+    }
+    // 创建房间
+    rpc CreateRoom (CreateRoomRequest) returns (JoinRoomReply) {
+    }
+    // 退出房间，只有code码
+    rpc RollOutRoom (RollOutRoomRequest) returns (CommonReply) {
+    }
+    // 房主踢人
+    rpc KicksPlayer (KicksPlayerRequest) returns (CommonReply) {
+    }
+}
+

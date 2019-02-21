@@ -1,0 +1,5 @@
+RoomServerStubProxy().CreateRoom(room_server_pb2.CreateRoomRequest(player_id=_player_id, type=_type, script_id=_script_id, lock=_lock,password=_password))
+
+
+# 生成存根方法
+python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. auth_server.proto
